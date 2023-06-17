@@ -45,6 +45,14 @@ void imprimirProdutos(Produto *p,int limite_estoque){
         }
     }
 }
+void procurarPorNome(Produto *p, int limite_estoque){
+    string nome = "";
+    int contador
+    cout <<"Insira o nome que deseja achar:";
+    cin >> nome;
+    
+    while()
+}
 
 bool verificaProdutoDuplicado(Produto *p, Produto produto, int limite_estoque){
     int contador = 0;
@@ -113,5 +121,6 @@ int main()
             inserirProduto(p, limite_estoque);
         }
     }
+    delete[] p;
     return 0;
 }
