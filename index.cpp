@@ -45,7 +45,18 @@ void imprimirProdutos(Produto *p,int limite_estoque){
         }
     }
 }
-void inserirProduto(Produto *p){
+
+bool verificaProdutoDuplicado(Produto *p, Produto produto, int limite_estoque){
+    int contador = 0;
+    while(contador < limite_estoque){
+        if(p[contador].nome == produto.nome){
+            return false;
+        }
+        contador++;
+    }
+    return true;
+}
+void inserirProduto(Produto *p, int limite_estoque){
     Produto produto;
     produto.id = i + 1;
     
@@ -58,10 +69,19 @@ void inserirProduto(Produto *p){
     cin >> produto.preco;
     cout <<"Informe o estoque do produto:";
     cin >> produto.estoque;
-    //Joga no array
     
-    p[i] = produto;
-    i++;
+    //Verifica
+    bool existProduct = verificaProdutoDuplicado(p, produto, limite_estoque);
+    
+    //Joga no array
+    if(existProduct){
+        p[i] = produto;
+        i++;
+    }else{
+        cout <<"produto já existente"<< endl;
+    }
+    
+    
 }
 
 int criarBaseDados(){
@@ -90,7 +110,7 @@ int main()
             imprimirProdutos(p,limite_estoque);
         }
         if(opcao == 2){
-            inserirProduto(p);
+            inserirProduto(p, limite_estoque);
         }
     }
     return 0;
