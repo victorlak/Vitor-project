@@ -1,4 +1,5 @@
 
+
 #include <iostream>
 
 using namespace std;
@@ -23,14 +24,50 @@ void menu(){
     cout <<"2 => Inserir produto" << endl;//FEITO
     cout <<"3 => Procurar pro nome" << endl;//FEITO
     cout <<"4 => Listar produtos abaixo do estoque" <<endl;//FEITO
-    cout <<"5 => Atualizar todos os dados" <<endl;
-    cout <<"6 => Atualizar produto" << endl;
-    cout <<"7 => Comprar produto"<< endl;
-    cout <<"8 => Vender produto" << endl;
-    cout <<"9 => Sair\n" <<endl;
+    cout <<"5 => Atualizar todos os dados" <<endl;//FEITO
+    cout <<"6 => Atualizar produto" << endl;//FEITO
+    cout <<"7 => Comprar produto"<< endl;//FEITO
+    cout <<"8 => Vender produto" << endl;//FEITO
+    cout <<"9 => Sair\n" <<endl;//FEITO
     cout <<"*********************"<<endl;
     cout <<"Escolha uma opcção:"<< endl;
     cout <<"*********************"<<endl;
+}
+void venderProduto(Produto *p,int limite_estoque){
+    int contador = 0;
+    int venda = 0;
+    string nome = "";
+    
+    cout<<"Informe o produto:"<<endl;
+    cin >>nome;
+    
+    while(contador<limite_estoque){
+        if(p[contador].nome == nome){
+            cout<<"Informe a quantia:";
+            cin >> venda;
+            p[contador].estoque = p[contador].estoque - venda;
+        }
+        contador++;
+    }
+    cout<<"Estoque atualizado!"<<endl;
+}
+void comprarProduto(Produto *p,int limite_estoque){
+    int contador = 0;
+    int compra = 0;
+    string nome = "";
+    
+    cout<<"Informe o produto para repor:"<<endl;
+    cin >>nome;
+    
+    while(contador<limite_estoque){
+        if(p[contador].nome == nome){
+            cout<<"Informe a quantia:";
+            cin >> compra;
+            p[contador].estoque = p[contador].estoque + compra;
+        }
+        contador++;
+    }
+    cout<<"Estoque atualizado!"<<endl;
 }
 void atualizarProduto(Produto *p,int limite_estoque){
     int verificaProduto = 0;
@@ -105,7 +142,7 @@ void imprimirProdutos(Produto *p,int limite_estoque){
             cout <<"nome:"<< p[contador].nome << endl;
             cout <<"preço:"<< p[contador].preco << endl;
             cout <<"custo:"<< p[contador].custo << endl;
-            cout <<"estoque:"<< p[contador].nome << endl;
+            cout <<"estoque:"<< p[contador].estoque << endl;
             contador++;
         }
     }
@@ -214,7 +251,15 @@ int main()
         if(opcao == 6){
             atualizarProduto(p,limite_estoque);
         }
+        if(opcao == 7){
+            comprarProduto(p,limite_estoque);
+        }
+        if(opcao == 8){
+            venderProduto(p,limite_estoque);
+        }
+        
     }
+    cout<<"Programa encerrado!";
     delete[] p;
     return 0;
 }
